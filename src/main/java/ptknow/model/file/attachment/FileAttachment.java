@@ -37,7 +37,7 @@ public class FileAttachment {
     Purpose purpose;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     @Setter
     FileVisibility fileVisibility;
 

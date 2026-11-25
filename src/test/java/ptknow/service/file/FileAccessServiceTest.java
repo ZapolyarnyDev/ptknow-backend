@@ -9,6 +9,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ptknow.exception.file.FileAttachmentNotFoundException;
 import ptknow.model.auth.Auth;
 import ptknow.model.auth.Role;
+import ptknow.model.course.Course;
 import ptknow.model.file.File;
 import ptknow.model.file.attachment.FileAttachment;
 import ptknow.model.file.attachment.FileVisibility;
@@ -87,7 +88,9 @@ class FileAccessServiceTest {
         FileAttachment attachment = attachment(fileId, auth(Role.TEACHER), ResourceType.COURSE, "42", FileVisibility.PRIVATE);
 
         when(attachmentRepository.findAllByFile_Id(fileId)).thenReturn(Set.of(attachment));
-        when(courseService.isOwner(42L, viewer)).thenReturn(true);
+        Course course = Course.builder().owner(viewer).build();
+        when(courseService.findCourseById(42L)).thenReturn(course);
+        when(courseService.canEdit(course, viewer)).thenReturn(true);
 
         assertTrue(fileAccessService.canRead(fileId, viewer));
     }

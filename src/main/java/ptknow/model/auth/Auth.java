@@ -151,6 +151,19 @@ public class Auth implements UserDetails {
         return status == UserStatus.ACTIVE;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        return other instanceof Auth auth && getId() != null && getId().equals(auth.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Auth.class.hashCode();
+    }
+
     public Set<FileAttachment> getFileAttachments() {
         return Collections.unmodifiableSet(fileAttachments);
     }

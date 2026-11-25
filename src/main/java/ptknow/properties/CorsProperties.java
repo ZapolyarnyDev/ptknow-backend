@@ -15,5 +15,5 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CorsProperties {
 
-    List<String> allowedOrigins = new ArrayList<>(List.of("http://localhost:5173"));
+    List<String> allowedOrigins = new ArrayList<>(List.of("http://localhost:5173", "http://127.0.0.1:5173"));
 }
